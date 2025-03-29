@@ -1,0 +1,29 @@
+name: Auto Payment Processor
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Jalan tiap jam
+  workflow_dispatch:  # Bisa dijalankan manual
+
+jobs:
+  process_payment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install  # Atau 'bun install' kalo lo pake Bun
+
+      - name: Run payment script
+        run: node index.js  # Atau 'bun run index.ts' kalo pake Bun
+        env:
+          ENABLE_PAYMENT: ${{ inputs.ENABLE_PAYMENT || vars.ENABLE_PAYMENT }}
+          BASE_URL: ${{ vars.BASE_URL }}
+          USER_TOKEN: ${{ secrets.USER_TOKEN }}
