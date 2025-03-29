@@ -1,0 +1,44 @@
+
+name: Auto Payment 30Days
+
+on:
+  schedule:
+    # - cron: "*/5 * * * *" # every 5 minute
+    - cron: '0 * * * *'  # Jalan tiap jam    
+    # - cron: "0 6 * * *" # 1 PM WIB
+    # - cron: "0 12 * * *" # 7 PM WIB
+    # - cron: "0 18 * * *" # 1 AM WIB (next day)
+  workflow_dispatch:  # Bisa dijalankan manual
+    inputs:
+      ENABLE_PAYMENT:
+        description: "Enable payment?"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  process_payment:
+    name: paymeter-job
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+       
+      - name: Setup bun.js
+        uses: oven-sh/setup-bun@v2
+        
+      - name: Install dependencies
+        run: bun install  # Atau 'bun install' kalo lo pake Bun
+
+      # 👇 Pass environment variable to disable payment
+      - name: Run payment script
+        # run: bun index.js  # Atau 'bun run index.ts' kalo pake Bun
+        run: |
+            echo "BASE_URL=${{ vars.BASE_URL }}"
+            echo "USER_TOKEN=${{ secrets.USER_TOKEN_VPS30 }}"
+            bun index.js
+        env:
+          ENABLE_PAYMENT: ${{ inputs.ENABLE_PAYMENT || vars.ENABLE_PAYMENT }}
+          BASE_URL: ${{ vars.BASE_URL }}
+          USER_TOKEN: ${{ secrets.USER_TOKEN_VPS30 }}
