@@ -1,4 +1,4 @@
-name: Auto Payment Processor
+name: Auto Payment 7Days
 
 on:
   schedule:
