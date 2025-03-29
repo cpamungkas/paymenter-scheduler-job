@@ -36,7 +36,7 @@ jobs:
         run: |
             echo "BASE_URL=${{ vars.BASE_URL }}"
             echo "USER_TOKEN=${{ secrets.USER_TOKEN_VPS7 }}"
-            bun index.js
+            bun index.ts
         env:
           ENABLE_PAYMENT: ${{ inputs.ENABLE_PAYMENT || vars.ENABLE_PAYMENT }}
           BASE_URL: ${{ vars.BASE_URL }}
