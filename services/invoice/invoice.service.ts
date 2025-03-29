@@ -1,8 +1,8 @@
 import type { InvoicesResponse } from "../../dtos/invoice";
 import type { Invoice } from "../../models/invoice";
 
-const BaseURL = process.env.BASE_URL;
-const UserToken = process.env.USER_TOKEN;
+const BaseURL =  ${{ secrets.BASE_URL }}; //process.env.BASE_URL;
+const UserToken =  ${{ secrets.USER_TOKEN }} //process.env.USER_TOKEN;
 
 if (!BaseURL) {
   throw new Error("Missing BASE_URL in environment variables");
