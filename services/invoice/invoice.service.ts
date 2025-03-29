@@ -1,6 +1,9 @@
 import type { InvoicesResponse } from "../../dtos/invoice";
 import type { Invoice } from "../../models/invoice";
 
+const BaseURL = process.env.BASE_URL;
+const UserToken = process.env.USER_TOKEN;
+
 console.log("BASE_URL:", process.env.BASE_URL || "Not Found");
 console.log("USER_TOKEN:", process.env.USER_TOKEN ? "Exists" : "Not Found");
 
