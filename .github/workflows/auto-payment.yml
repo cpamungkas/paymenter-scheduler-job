@@ -1,12 +1,12 @@
-name: Auto Payment Processor
+name: Auto Payment 1Days
 
 on:
   schedule:
   # - cron: "*/5 * * * *" # every 5 minute
     - cron: '0 * * * *'  # Jalan tiap jam    
-    - cron: "0 6 * * *" # 1 PM WIB
-    - cron: "0 12 * * *" # 7 PM WIB
-    - cron: "0 18 * * *" # 1 AM WIB (next day)
+    # - cron: "0 6 * * *" # 1 PM WIB
+    # - cron: "0 12 * * *" # 7 PM WIB
+    # - cron: "0 18 * * *" # 1 AM WIB (next day)
   workflow_dispatch:  # Bisa dijalankan manual
     inputs:
       ENABLE_PAYMENT:
@@ -33,10 +33,7 @@ jobs:
       # 👇 Pass environment variable to disable payment
       - name: Run payment script
         # run: bun index.js  # Atau 'bun run index.ts' kalo pake Bun
-        run: |
-            echo "BASE_URL=${{ vars.BASE_URL }}"
-            echo "USER_TOKEN=${{ secrets.USER_TOKEN }}"
-            bun index.js
+        run: bun index.js
         env:
           ENABLE_PAYMENT: ${{ inputs.ENABLE_PAYMENT || vars.ENABLE_PAYMENT }}
           BASE_URL: ${{ vars.BASE_URL }}
