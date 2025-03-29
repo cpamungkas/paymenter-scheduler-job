@@ -32,7 +32,11 @@ jobs:
 
       # 👇 Pass environment variable to disable payment
       - name: Run payment script
-        run: bun index.js  # Atau 'bun run index.ts' kalo pake Bun
+        # run: bun index.js  # Atau 'bun run index.ts' kalo pake Bun
+        run: |
+            echo "BASE_URL=${{ secrets.BASE_URL }}"
+            echo "USER_TOKEN=${{ secrets.USER_TOKEN }}"
+            bun index.js
         env:
           ENABLE_PAYMENT: ${{ inputs.ENABLE_PAYMENT || vars.ENABLE_PAYMENT }}
           BASE_URL: ${{ vars.BASE_URL }}
