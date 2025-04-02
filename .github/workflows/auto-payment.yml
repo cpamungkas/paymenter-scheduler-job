@@ -3,7 +3,7 @@ name: Auto Payment 1Days
 on:
   schedule:
   # - cron: "*/5 * * * *" # every 5 minute
-    - cron: '0 * * * *'  # Jalan tiap jam    
+    # - cron: '0 * * * *'  # Jalan tiap jam    
     # - cron: "0 6 * * *" # 1 PM WIB
     # - cron: "0 12 * * *" # 7 PM WIB
     # - cron: "0 18 * * *" # 1 AM WIB (next day)
